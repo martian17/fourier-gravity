@@ -1,0 +1,19 @@
+{
+  "name": "convolution-web",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5"
+  },
+  "dependencies": {
+    "flat-fft": "^2.0.2",
+    "htmlgen": "github:martian17/htmlgen"
+  }
+}
