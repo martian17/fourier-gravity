@@ -87,7 +87,7 @@ export const convolveComplex = function(arr1: Float32Array, arr2: Float32Array){
     return res;
 };
 
-export const convolve = function(arr1,arr2){
+export const convolve = function(arr1: number[], arr2: number[]){
     return convolveComplex(FlatFFT.toComplex(arr1),FlatFFT.toComplex(arr2));
 };
 
@@ -117,46 +117,3 @@ export const convolve2d = function(arr1: number[], arr2: number[], width: number
 };
 
 
-const convolveSlow = function(a,b){
-    let res = [];
-    for(let i = 0; i < a.length; i++){
-        let r = 0;
-        for(let j = 0; j < b.length; j++){
-            r += a[i]*b[j];
-        }
-        res.push(r);
-    }
-    return FlatFFT.toComplex(res);
-}
-
-
-
-//console.log(convolve([0,0,0,1],[2,1,0,1]));
-//console.log(convolve([0,2,0,0],[2,1,1,1]));
-let r = convolve2d(
-    [
-    //     11,12,13,14,
-    //     21,22,23,24,
-    //     31,32,33,34,
-    //     41,42,43,44,
-        0,0,0,0,
-        0,0,0,0,
-        0,0,1,0,
-        0,0,0,0,
-    ],
-    [
-        2,1,0,1,
-        1,1,0,1,
-        0,0,0,0,
-        1,1,0,1,
-    ],
-    4,4);
-
-r = [...r].map(v=>Math.round(v*100000)/100000);
-
-console.log(`
-${r[0]} ${r[2]} ${r[4]} ${r[6]}
-${r[8]} ${r[10]} ${r[12]} ${r[14]}
-${r[16]} ${r[18]} ${r[20]} ${r[22]}
-${r[24]} ${r[26]} ${r[28]} ${r[30]}
-`);
