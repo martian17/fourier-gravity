@@ -14,7 +14,7 @@ CSS.add(`
     justify-content: center;
     align-content: center; 
     grid-template-columns: ${width}px 15em;
-    grid-template-rows: 1fr 4em;
+    grid-template-rows: 1fr 5em;
     column-gap: 1em;
     row-gap: 1em;
     padding: 1em;
@@ -74,29 +74,23 @@ class SimCanvas extends ELEM{
         canvas.width = width;
         canvas.height = height;
         const ctx = this.ctx = canvas.getContext("2d");
-        ctx.font = "70px Arial";
-        ctx.textAlign = "center";
-        ctx.fillText("What?",width/2,height*0.3);
-        ctx.fillText("The",width/2,height*0.5);
-        ctx.fillText("Fuck",width/2,height*0.7);
-        const objects = this.objects = [];// mass, x, y, vx, vy
+
         const imgdata = this.imgdata = ctx.getImageData(0,0,width,height);
         const data = this.data = imgdata.data;
+
+        const objects = this.objects = [];// mass, x, y, vx, vy
         for(let y = 0; y < width; y++){
             for(let x = 0; x < width; x++){
-                const idx = (y*width+x)*4;
-                const alpha = data[idx+3];
-                if(alpha > 100){
-                    for(let dx = 0; dx < 1; dx += 0.2){
-                        for(let dy = 0; dy < 1; dy += 0.2){
-                            const xx = (x+dx)*pw;
-                            const yy = (y+dy)*pw;
-                            objects.push([1.989e+30,xx,yy,0,0]);
-                        }
+                for(let dx = 0; dx < 1; dx += 0.2){
+                    for(let dy = 0; dy < 1; dy += 0.2){
+                        const xx = (x+dx)*pw;
+                        const yy = (y+dy)*pw;
+                        if(Math.random() < 0.04)objects.push([1.989e+30,xx,yy,0,0]);
                     }
                 }
             }
         }
+
         this.density = new Float32Array(width*height);
         this.simulation = new GravitySimulation(objects, simPW, simulationWidth, simulationHeight);
     }
@@ -174,9 +168,9 @@ export default class GravitySim extends ELEM{
             e_y.setInner(`${years} years`);
         };
 
-        const bottom = this.add("div","class: stdbox bottom", "Impressed? Here is a more realistic cosmological simulation →");
+        const bottom = this.add("div","class: stdbox bottom", "Impressed? You can also simulate your mom →");
         bottom.on("click",()=>{
-            goto("cosmological");
+            goto("fasdlj");
             sim.stop();
         })
         sim.start();

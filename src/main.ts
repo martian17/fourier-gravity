@@ -2,7 +2,8 @@ import { ELEM, CSS } from "htmlgen";
 import "./common";
 import { Page404 } from "./404";
 import { Sim } from "./sim";
-import { GravitySim } from "./gravity-sim/sim-ui";
+import GravitySim from "./gravity-sim/sim-ui";
+import Cosmological from "./gravity-sim/cosmological";
 
 import {initRouter} from "./router";
 
@@ -12,10 +13,12 @@ class App{
         this.pages = {
             page404: Page404,
             sim: Sim,
-            "gravity-sim": GravitySim
+            "gravity-sim": GravitySim,
+            "cosmological": Cosmological
             //about: About
         };
-        this.route("gravity-sim");
+        const searchParams = new URLSearchParams(window.location.search);
+        this.route(searchParams.get("page") || "gravity-sim");
     }
     route(page: string, ...args: any[]){
         if(!(page in this.pages))
