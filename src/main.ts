@@ -1,7 +1,10 @@
 import { ELEM, CSS } from "htmlgen";
 import "./common";
 import { Page404 } from "./404";
-import { Sim } from "./Sim";
+import { Sim } from "./sim";
+import { GravitySim } from "./gravity-sim/sim-ui";
+
+import {initRouter} from "./router";
 
 class App{
     constructor(container: HTMLElement){
@@ -9,9 +12,10 @@ class App{
         this.pages = {
             page404: Page404,
             sim: Sim,
+            "gravity-sim": GravitySim
             //about: About
         };
-        this.route("sim");
+        this.route("gravity-sim");
     }
     route(page: string, ...args: any[]){
         if(!(page in this.pages))
@@ -30,4 +34,6 @@ class App{
 CSS.init();
 
 const app = new App(document.body);
+
+initRouter(app);
 
