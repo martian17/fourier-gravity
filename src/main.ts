@@ -11,7 +11,7 @@ class App{
             sim: Sim,
             //about: About
         };
-        this.route("simm");
+        this.route("sim");
     }
     route(page: string, ...args: any[]){
         if(!(page in this.pages))
