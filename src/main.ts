@@ -3,6 +3,7 @@ import "./common";
 import { Page404 } from "./404";
 import { Sim } from "./sim";
 import GravitySim from "./gravity-sim/sim-ui";
+import Ganon from "./gravity-sim/ganon";
 import Cosmological from "./gravity-sim/cosmological";
 
 import {initRouter} from "./router";
@@ -14,6 +15,7 @@ class App{
             page404: Page404,
             sim: Sim,
             "gravity-sim": GravitySim,
+            "ganon": Ganon,
             "cosmological": Cosmological
             //about: About
         };
