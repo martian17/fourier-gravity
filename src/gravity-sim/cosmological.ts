@@ -1,5 +1,5 @@
 import {CSS, ELEM} from "htmlgen";
-import {GravitySimulation} from "./sim-backend";
+import {GravitySimulation} from "./cosmo-backend";
 import {goto} from "../router";
 
 const width = 512;
@@ -58,7 +58,6 @@ const toColor = function(v: number){
 };
 
 const squash = function(x,slope=0.01){
-    slope = 0.2e-31;
     if(x === Infinity)return 1;
     // log => sigmoid
     return -2/(1+Math.E**(2*Math.log(slope*x+1)))+1;
@@ -110,7 +109,7 @@ class SimCanvas extends ELEM{
         for(let y = 0; y < height; y++){
             for(let x = 0; x < width; x++){
                 let idx = y*width+x;
-                const [r,g,b,a] = toColor(squash(density[idx],1));
+                const [r,g,b,a] = toColor(squash(density[idx],1e-31));
                 data[idx*4+0] = r;
                 data[idx*4+1] = g;
                 data[idx*4+2] = b;

@@ -1,5 +1,16 @@
 import {convolve2dComplex} from "../convolution";
 
+const expansionFunction = (t)=>{
+    //return Math.log(t/10+1)*30+1+t/10;
+    //return 10/(1+Math.E**(-t/1+4.6))+0.1*t;
+    //return 10*Math.log(t+0.1)+10+t;
+    console.log(t);
+    t *= 1;
+    const t1 = 20;
+    const ef = (2/(1+Math.E**(-2*t/t1))-1)*t1+0.01*t
+    return (2**ef)/100//+t/10
+}
+
 
 export class GravitySimulation{
     constructor(objects, pw, width, height){
@@ -41,7 +52,11 @@ export class GravitySimulation{
             }
         }
     }
-    G = 6.6743015e-11;
+    //G = 6.6743015e-11;
+    G = 6.6743015e-8;
+    //Λ = 1;
+    volume = 1;
+    t = 0;
     step(dt: number){
         //calculate density field
         const density = this.densityMask;
@@ -64,14 +79,19 @@ export class GravitySimulation{
         //for now calculate without close field interaction
         const s_width = width*pw;
         const s_height = height*pw;
+        const v0 = expansionFunction(this.t++);
+        const v1 = expansionFunction(this.t);
+        const vr = v1/v0;
         
         for(let object of objects){
             const x_ = Math.floor(object[1]/pw);
             const y_ = Math.floor(object[2]/pw);
             const idx = y_*width+x_;
-            object[3] += xaccs[idx*2]*dt//*this.Λ;
-            object[4] += yaccs[idx*2]*dt//*this.Λ;
+            object[3] += xaccs[idx*2]*dt/v1//*this.Λ;
+            object[4] += yaccs[idx*2]*dt/v1//*this.Λ;
 
+            object[3] /= vr;
+            object[4] /= vr;
 
             object[1] = (object[1] + object[3]*dt + s_width)%s_width;
             object[2] = (object[2] + object[4]*dt + s_height)%s_height;

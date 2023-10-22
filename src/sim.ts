@@ -2,7 +2,7 @@ import {CSS, ELEM} from "htmlgen";
 import {convolve2dComplex} from "./convolution.js";
 
 const width = 512/2;
-const height = 512/2/2;
+const height = 512/2;
 
 CSS.add(`
 .sim{
@@ -169,7 +169,7 @@ class SimCanvas extends ELEM{
             this.step(0.8);
             //console.log(this.objects);
             //return;
-            await new Promise(res=>setTimeout(res,100));
+            await new Promise(res=>setTimeout(res,0));
         }
     }
 }
