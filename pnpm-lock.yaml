@@ -10,7 +10,7 @@ dependencies:
     version: 2.0.2
   htmlgen:
     specifier: github:martian17/htmlgen
-    version: github.com/martian17/htmlgen/6cf5b4cafedcbba312d329bd7fcb17239fe86828
+    version: github.com/martian17/htmlgen/96b217cd022cc9532e18ed2ef95d8e6a2f70e7f2
 
 devDependencies:
   '@types/jest':
@@ -2620,8 +2620,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  github.com/martian17/htmlgen/6cf5b4cafedcbba312d329bd7fcb17239fe86828:
-    resolution: {tarball: https://codeload.github.com/martian17/htmlgen/tar.gz/6cf5b4cafedcbba312d329bd7fcb17239fe86828}
+  github.com/martian17/htmlgen/96b217cd022cc9532e18ed2ef95d8e6a2f70e7f2:
+    resolution: {tarball: https://codeload.github.com/martian17/htmlgen/tar.gz/96b217cd022cc9532e18ed2ef95d8e6a2f70e7f2}
     name: htmlgen
-    version: 1.0.0
+    version: 2.0.0
     dev: false

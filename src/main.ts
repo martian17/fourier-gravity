@@ -5,18 +5,30 @@ import { Sim } from "./sim";
 import GravitySim from "./gravity-sim/sim-ui";
 import Ganon from "./gravity-sim/ganon";
 import Cosmological from "./gravity-sim/cosmological";
+import UIP from "./uip/main";
+import Nice from "./uip/nice";
+import Bad from "./uip/bad";
+import FluidSim from "./fluid-sim/sim-ui";
+//import GravitySimMsg from "./gravity-sim/simmsg";
 
 import {initRouter} from "./router";
 
+type AConstructorTypeOf<T> = new (...args:any[]) => T;
+
 class App{
-    constructor(container: HTMLElement){
-        this.container = container;
+    pages: any;
+    constructor(public container: HTMLElement){
         this.pages = {
             page404: Page404,
             sim: Sim,
             "gravity-sim": GravitySim,
             "ganon": Ganon,
-            "cosmological": Cosmological
+            "cosmological": Cosmological,
+            "uip": UIP,
+            "fluid": FluidSim,
+            "nice": Nice,
+            "bad": Bad,
+            //"whatsup": GravitySimMsg("What's up?\nWanna have a chat?")
             //about: About
         };
         const searchParams = new URLSearchParams(window.location.search);
@@ -27,8 +39,10 @@ class App{
             page = "page404";
         this.setPage(this.pages[page],args);
     }
-    setPage(page: ELEM, args: any){
+    current?: ELEM;
+    setPage(page: AConstructorTypeOf<ELEM>, args: any){
         this.current?.remove?.();
+        console.log(args);
         this.current = new page(args);
         console.log(this.container,this.current.e);
         this.container.appendChild(this.current.e);
@@ -37,7 +51,7 @@ class App{
 
 
 CSS.init();
-
+console.log("asdf");
 const app = new App(document.body);
 
 initRouter(app);

@@ -30,9 +30,9 @@ export class Page404 extends ELEM{
     constructor(){
         super("div",{id:"e404"});
         this.add("div",{class:"stdbox"},"The resource you were looking for were not found");
-        let container = this.add("div",{class:"stdbox container"});
-        container.add("h1",0,"418 Ur mom is a teapot");
+        let container = this.add("div",{class: "stdbox container"});
+        container.add("h1",0,"404 Not Found");
         let img = container.add("img");
-        img.attr("src",logo404);
+        img.attr("src", logo404);
     }
 }

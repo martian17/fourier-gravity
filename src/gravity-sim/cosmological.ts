@@ -57,7 +57,7 @@ const toColor = function(v: number){
     return [r,g,b,a];
 };
 
-const squash = function(x,slope=0.01){
+const squash = function(x: number, slope=0.01){
     if(x === Infinity)return 1;
     // log => sigmoid
     return -2/(1+Math.E**(2*Math.log(slope*x+1)))+1;
@@ -65,33 +65,40 @@ const squash = function(x,slope=0.01){
 
 
 class SimCanvas extends ELEM{
+    canvas: HTMLCanvasElement;
+    pw: number;
+    ctx: CanvasRenderingContext2D;
+    objects: number[][] = [];// mass, x, y, vx, vy
+    imgdata: ImageData;
+    data: Uint8ClampedArray;
+    density: Float32Array;
+    simulation: GravitySimulation;
     constructor(){
         super("canvas");
         const simPW = 150e+9;// 1 AU 
         const pw = this.pw = simPW*simulationWidth/width;
-        const canvas = this.canvas = this.e;
+        const canvas = this.canvas = this.e as HTMLCanvasElement;
         canvas.width = width;
         canvas.height = height;
-        const ctx = this.ctx = canvas.getContext("2d");
+        const ctx = this.ctx = canvas.getContext("2d")!;
 
         const imgdata = this.imgdata = ctx.getImageData(0,0,width,height);
-        const data = this.data = imgdata.data;
+        this.data = imgdata.data;
 
-        const objects = this.objects = [];// mass, x, y, vx, vy
         for(let y = 0; y < width; y++){
             for(let x = 0; x < width; x++){
                 for(let dx = 0; dx < 1; dx += 0.2){
                     for(let dy = 0; dy < 1; dy += 0.2){
                         const xx = (x+dx)*pw;
                         const yy = (y+dy)*pw;
-                        if(Math.random() < 0.04)objects.push([1.989e+30,xx,yy,0,0]);
+                        if(Math.random() < 0.04)this.objects.push([1.989e+30,xx,yy,0,0]);
                     }
                 }
             }
         }
 
         this.density = new Float32Array(width*height);
-        this.simulation = new GravitySimulation(objects, simPW, simulationWidth, simulationHeight);
+        this.simulation = new GravitySimulation(this.objects, simPW, simulationWidth, simulationHeight);
     }
     step(dt: number){
         //calculate density field
@@ -133,7 +140,7 @@ class SimCanvas extends ELEM{
     async stop(){
         this.stopped = true;
     }
-    onFrame = ()=>{};
+    onFrame = (t: number, dt: number)=>{};
 }
 
 
@@ -147,9 +154,9 @@ CSS.add(`
 
 export default class GravitySim extends ELEM{
     constructor(){
-        super("div","class: sim");
-        const main = this.add("div","class: stdbox main",0,"padding:0px;");
-        const right = this.add("div","class: stdbox right");
+        super("div",{class: "sim"});
+        const main = this.add("div",{class: "stdbox main"},0,{padding: "0px"});
+        const right = this.add("div",{class: "stdbox right"});
         const sim = main.add(new SimCanvas());
 
         right.add("div",0,`Number of particles: ${sim.objects.length}`);
@@ -167,7 +174,7 @@ export default class GravitySim extends ELEM{
             e_y.setInner(`${years} years`);
         };
 
-        const bottom = this.add("div","class: stdbox bottom", "Impressed? You can also simulate your mom →");
+        const bottom = this.add("div",{class: "stdbox bottom"}, "Impressed? You can also simulate your mom →");
         bottom.on("click",()=>{
             goto("fasdlj");
             sim.stop();

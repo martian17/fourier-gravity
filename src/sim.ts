@@ -45,7 +45,7 @@ const toColor = function(v: number){
     return [r,g,b,a];
 };
 
-const squash = function(x,slope=0.01){
+const squash = function(x: number, slope=0.01){
     slope = 0.2e-31;
     if(x === Infinity)return 1;
     // log => sigmoid

@@ -1,6 +1,6 @@
 import {convolve2dComplex} from "../convolution";
 
-const expansionFunction = (t)=>{
+const expansionFunction = (t: number)=>{
     //return Math.log(t/10+1)*30+1+t/10;
     //return 10/(1+Math.E**(-t/1+4.6))+0.1*t;
     //return 10*Math.log(t+0.1)+10+t;
@@ -13,17 +13,16 @@ const expansionFunction = (t)=>{
 
 
 export class GravitySimulation{
-    constructor(objects, pw, width, height){
-        this.pw = pw;
+    densityMask: Float32Array;
+    kernelX: Float32Array;
+    kernelY: Float32Array;
+    constructor(public objects: number[][], public pw: number, public width: number, public height: number){
         const size = width*height;
         const hw = Math.floor(width/2);
         const hh = Math.floor(height/2);
         this.densityMask = new Float32Array(size*2);
         this.kernelX     = new Float32Array(size*2);
         this.kernelY     = new Float32Array(size*2);
-        this.objects = objects;
-        this.width = width;
-        this.height = height;
 
         //create kernels for the xy gravity map
         for(let y = 0; y < width; y++){
