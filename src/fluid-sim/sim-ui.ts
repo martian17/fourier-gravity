@@ -117,7 +117,7 @@ export default class Main extends ELEM{
         this.add(createLayout({
             row: 3,
             buds: [
-                {col: -1, css: {width: "min(60vh, 50vw)", height: "min(60vh, 50vw)"}, buds: [SimulationCanvas.create()]},
+                //{col: -1, css: {width: "min(60vh, 50vw)", height: "min(60vh, 50vw)"}, buds: [SimulationCanvas.create()]},
                 {col: 1},
                 {col: 1},
             ],

@@ -1,6 +1,6 @@
 import {CSS, ELEM} from "htmlgen";
 import {GravitySimulation} from "./sim-backend";
-import {goto} from "../router";
+import {goto} from "../src/router";
 import {getStarsFromMessage} from "./util";
 
 const width = 512;

@@ -244,7 +244,7 @@ const ferrimDragon = function(row: number, col: number, ratios: Ratio[]){
 }
 
 
-const GAP = 10;
+const GAP = 20;
 
 export default class NiceDragon extends ELEM{
     constructor(){
@@ -265,9 +265,9 @@ export default class NiceDragon extends ELEM{
             child!.remove();
         }
         //const ratios: Ratio[] = [{row: 5, col: 5}, {row: 2, col: 5}, {row: 2, col: 2}, {row: 2, col: 2}, {row: 5, col: 4}, {row: 5, col: 2}, {row: 5, col: 2}, {row: 7, col: 4}];
-        //const ratios: Ratio[] = [{row: 2, col: 2}, {row: 1, col: 2}, {row: 1, col: 1}, {row: 1, col: 1}, {row: 2, col: 2}, {row: 2, col: 1}, {row: 2, col: 1}, {row: 3, col: 2},{row:1,col:1},{row:1,col:1}];
+        const ratios: Ratio[] = [{row: 2, col: 2}, {row: 1, col: 2}, {row: 1, col: 1}, {row: 1, col: 1}, {row: 2, col: 2}, {row: 2, col: 1}, {row: 2, col: 1}, {row: 3, col: 2},{row:1,col:1},{row:1,col:1}];
         //const ratios: Ratio[] = [{row: 2, col: 1},{row:1,col:1},{row:1,col:1}];
-        const ratios: Ratio[] = new Array(100).fill(0).map(v=>({row: Math.floor(Math.random()*3+1), col: Math.floor(Math.random()*3+1)}));
+        //const ratios: Ratio[] = new Array(100).fill(0).map(v=>({row: Math.floor(Math.random()*3+1), col: Math.floor(Math.random()*3+1)}));
         const width = window.innerWidth;
         const height = window.innerHeight;
         const screenArea = width*height;

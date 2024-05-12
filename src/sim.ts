@@ -54,9 +54,17 @@ const squash = function(x: number, slope=0.01){
 
 
 class SimCanvas extends ELEM{
+    canvas: HTMLCanvasElement;
+    densityMask: Float32Array;
+    kernelX:     Float32Array;
+    kernelY:     Float32Array;
+    ctx: CanvasRenderingContext2D;
+    objects: number[][] = [];// mass, x, y, vx, vy
+    imgdata: ImageData;
+    density: Float32Array;
     constructor(){
         super("canvas");
-        const canvas = this.canvas = this.e;
+        const canvas = this.canvas = this.e as HTMLCanvasElement;
         canvas.width = width;
         canvas.height = height;
         const ctx = canvas.getContext("2d");
@@ -185,9 +193,9 @@ CSS.add(`
 
 export class Sim extends ELEM{
     constructor(){
-        super("div","class: sim");
-        const main = this.add("div","class: stdbox main",0,"padding:0px;");
-        const right = this.add("div","class: stdbox right");
+        super("div",{class: "sim"});
+        const main = this.add("div",{class: "stdbox main"},0,{padding:"0px"});
+        const right = this.add("div",{class: "stdbox right"});
         const sim = main.add(new SimCanvas());
         right.add("div",0,`Number of particles: ${sim.objects.length}`);
     }

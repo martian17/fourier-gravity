@@ -1,6 +1,6 @@
 import {CSS, ELEM} from "htmlgen";
 import {GravitySimulation} from "./sim-backend";
-import {goto} from "../router";
+import {goto} from "../src/router";
 
 const width = 512;
 const height = 512;
@@ -28,7 +28,7 @@ const squash = function(x,slope=0.01){
 const getStarsFromMessage = function(width: number, height: number, pixelWidth: number, message: string){
     const canvas = document.createElement("canvas");
     canvas.width = width;
-    canvas.heigth = height;
+    canvas.height = height;
     const ctx = canvas.getContext("2d");
     const lines = message.split("\n");
     ctx.font = "70px Arial";
