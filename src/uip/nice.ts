@@ -230,7 +230,7 @@ const chaosDragon = function(row: number, col: number, ratios: Ratio[]){
 
 const ferrimDragonWalk = function(tree: Tree, depth: number){
     if(!tree.children)return tree;
-    if(depth%2 === 0)tree.children.reverse();
+    //if(depth%2 === 0)tree.children.reverse();
     for(let child of tree.children){
         if(child.isTree)ferrimDragonWalk(child,depth+1);
     }

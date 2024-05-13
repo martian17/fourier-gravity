@@ -8,6 +8,7 @@ import Cosmological from "./gravity-sim/cosmological";
 import UIP from "./uip/main";
 import Nice from "./uip/nice";
 import Bad from "./uip/bad";
+import Final from "./uip/final";
 import FluidSim from "./fluid-sim/sim-ui";
 //import GravitySimMsg from "./gravity-sim/simmsg";
 
@@ -28,6 +29,7 @@ class App{
             "fluid": FluidSim,
             "nice": Nice,
             "bad": Bad,
+            "final": Final,
             //"whatsup": GravitySimMsg("What's up?\nWanna have a chat?")
             //about: About
         };
